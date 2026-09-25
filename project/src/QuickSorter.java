@@ -1,45 +1,50 @@
 import java.util.Random;
 
 public class QuickSorter {
-    private static final Random RANDOM = new Random();
-    public static void sort(int[] arr) {
-        if (arr == null || arr.length <= 1) {
-            return;
-        }
-        sort(arr, 0, arr.length - 1);
-    }
-    private static void sort(int[] arr, int low, int high) {
-        while (low < high) {
-            int pivotIndex = partition(arr, low, high);
+    public long comparisons = 0;
+    public int maxRecursionDepth = 0;
+    private final Random random = new Random();
 
-            int leftSize = pivotIndex - low;
-            int rightSize = high - pivotIndex;
+    public void quickSort(int[] arr) {
+        if (arr == null || arr.length <= 1) return;
+        comparisons = 0;
+        maxRecursionDepth = 0;
+        quickSort(arr, 0, arr.length - 1, 1);
+    }
+    public void quickSort(int[] arr, int start, int end, int depth) {
+        while (start < end) {
+            if (depth > maxRecursionDepth) {
+                maxRecursionDepth = depth;
+            }
+
+            int randomIndex = start + random.nextInt(end - start + 1);
+            int pivot = arr[randomIndex];
+            int lt = start;
+            int gt = end;
+            int i = start;
+
+            while (i <= gt) {
+                comparisons++;
+                if (arr[i] < pivot) {
+                    swap(arr, lt++, i++);
+                } else if (arr[i] > pivot) {
+                    swap(arr, i, gt--);
+                } else {
+                    i++;
+                }
+            }
+
+            int leftSize = lt - start;
+            int rightSize = end - gt;
 
             if (leftSize < rightSize) {
-                sort(arr, low, pivotIndex - 1);
-                low = pivotIndex + 1;
+                quickSort(arr, start, lt - 1, depth + 1);
+                start = gt + 1;
             } else {
-                sort(arr, pivotIndex + 1, high);
-                high = pivotIndex - 1;
+                quickSort(arr, gt + 1, end, depth + 1);
+                end = lt - 1;
             }
         }
-    }
-
-    private static int partition(int[] arr, int low, int high) {
-        int randomPivotIndex = low + RANDOM.nextInt(high - low + 1);
-        swap(arr, randomPivotIndex, high);
-
-        int pivot = arr[high];
-        int i = low - 1;
-        for (int j = low; j < high; j++) {
-            if (arr[j] <= pivot) {
-                i++;
-                swap(arr, i, j);
-            }
-        }
-        swap(arr, i + 1, high);
-
-        return i + 1;
     }
 
     private static void swap(int[] arr, int i, int j) {
