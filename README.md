@@ -1,7 +1,7 @@
 # DAA - Assignment 1: Divide and Conquer
 
 ## Project Overview
-This project implements and analyzes four classic Divide and Conquer algorithms: **Merge Sort**, **Quick Sort** (with 3-way partitioning and randomization), **Deterministic Select** (Median-of-Medians), and **Closest Pair of Points**. The main goal was to evaluate their performance across various datasets (Random, Sorted, Reverse-sorted, Duplicate-heavy) and empirically validate their theoretical asymptotic complexities. The program collects execution time, comparison counts, and maximum recursion depth metrics for analysis.
+This project implements and analyzes four classic Divide and Conquer algorithms: **Merge Sort**, **Quick Sort**, **Deterministic Select** (Median-of-Medians), and **Closest Pair of Points**. The main goal was to evaluate their performance across various datasets (Random, Sorted, Reverse-sorted, Duplicate-heavy) and empirically validate their theoretical asymptotic complexities. The program collects execution time, comparison counts, and maximum recursion depth metrics for analysis.
 
 ## Algorithm Analysis
 
